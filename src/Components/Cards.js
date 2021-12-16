@@ -11,33 +11,19 @@ function Cards() {
         const response = await fetch('http://10.1.4.205:8085/api/Noticeboard/Advertisments');
         setmydata(await response.json());
     }
-
     const openInNewTab = (url) => {
        const newWindow = window.open(url,'_blank', 'noopener,noreferrer');
         if (newWindow) newWindow.opener = null;
     }
-
     const origin = "http://10.1.4.205:8085";
 
     useEffect(() => {
         getdata();
-        // axios.get('https://jsonplaceholder.typicode.com/albums/')
-        // .then(response=>{
-        //     console.log(response)
-        //     setmydata(response.data)
-        // }).catch(err=>{
-        //     console.log(err)
-        // })
     }, []);
 
     return (
-    
-
-
         <div id="cards" className="container-fluid">
-            
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-
                 {
                     mydata.map((curEle) => {
                         return (
@@ -62,15 +48,9 @@ function Cards() {
                                 </Card>
                             </Col>
                             )
-
                     })
-
                 }
-
             </Row>
-        
-
-
         </div>
     )
 }
