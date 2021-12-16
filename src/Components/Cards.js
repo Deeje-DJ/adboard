@@ -17,6 +17,8 @@ function Cards() {
     }
     const origin = "http://10.1.4.205:8085";
 
+    var mainImg;
+
     useEffect(() => {
         getdata();
     }, []);
@@ -26,12 +28,31 @@ function Cards() {
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                 {
                     mydata.map((curEle) => {
+
                         return (
+                            
                             <Col span={8}>
+                                {
+                                    curEle.Images.forEach(img => {
+                                        if (img.IsMainImage == "Y") {
+                                            mainImg = origin + img.Path;
+                                            console.log(img.Path);
+                                        } 
+                                    })
+                                }
+                                
                                 <Card
                                     hoverable
                                     style={{ marginBottom: 20 }}
-                                    cover={<img alt="example" src= {origin + curEle.Images[0]['Path']} />}
+                                    cover={
+                                            <img 
+                                                alt="example" 
+                                                src= {
+                                                    mainImg
+                                                } 
+                                            
+                                            />
+                                        }
                                     key={curEle.Id}
                                     onClick={() => openInNewTab(curEle.url)}
                                 >
@@ -43,6 +64,10 @@ function Cards() {
                                         <p>
                                             <b>Remarks:</b> {curEle.Remarks}
                                         </p> 
+                                        <p>
+                                            <b>Value:</b> {curEle.ItemValue}
+                                        </p> 
+                                        
                                     </div>
                                     <Meta title={curEle.Detail} description={curEle.CreatedBy} />
                                 </Card>
